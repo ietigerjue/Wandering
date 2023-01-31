@@ -6,11 +6,13 @@ using UnityEngine;
 public class UnderWater : BaseInter
 {
     public float waterAmount;
+    public float speedAmount;
     private void OnEnable()
     {
         addEvent(() =>
         {
-            EventHandler.GetInstance().CallUpWaterChange(waterAmount);
+            EventHandler.CallUpWaterChange(waterAmount);
+            EventHandler.CallUpSpeedChange(speedAmount);
         });
     }
 

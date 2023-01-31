@@ -5,7 +5,9 @@ using UnityEngine;
 public class RootModel : BaseManager<RootModel>
 {
     //生长速度
-    public float GrowSpeed = 1;
+    public float CurSpeed = 1;
+    public float ExtraSpeed = 0;
+    public float GrowSpeed => Mathf.Clamp(CurSpeed + ExtraSpeed, MinGrowSpeed, MaxGrowSpeed);
     //最低生长渡
     public float MinGrowSpeed = 0.5f;
     //最高生长渡
