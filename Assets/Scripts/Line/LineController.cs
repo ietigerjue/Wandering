@@ -6,9 +6,15 @@ using UnityEngine.EventSystems;
 
 public class LineController : MonoBehaviour
 {
-    public LineRenderer linePfb;
     //生长的速度
-    public float speed = 0.5f;
+    private float CurSpeed
+    {
+        get
+        {
+            var rootModel = RootModel.GetInstance();
+            return Mathf.Clamp(rootModel.GrowSpeed, rootModel.MinGrowSpeed, rootModel.MaxGrowSpeed);
+        }
+    }
     //判断是否在生长
     private bool _isGrow;
     //当前的生长点
@@ -17,6 +23,8 @@ public class LineController : MonoBehaviour
     private Vector2 _growDir;
     //检测墙壁距离
     public float rayLength;
+    //消耗值
+    public float growWaterCost;
 
     private void Start()
     {
@@ -39,19 +47,18 @@ public class LineController : MonoBehaviour
     {
         var inputDir = ((Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition) - _lastPos).normalized;
         _growDir = Vector2.Lerp(_growDir, inputDir, 0.05f);
-        var newPos = _lastPos + _growDir * speed * Time.deltaTime;
-        var ray = Physics2D.Raycast(newPos, _growDir, rayLength);
+        var newPos = _lastPos + _growDir * CurSpeed * Time.deltaTime;
+        var ray = Physics2D.Raycast(newPos, _growDir, rayLength, LayerMask.NameToLayer("Ground"));
         if (ray.collider)
         {
             _isGrow = false;
         }
         if (_isGrow)
         {
-            var line = Instantiate(linePfb, transform);
-            line.SetPosition(0, _lastPos- _growDir * speed * Time.deltaTime * 0.5f);
-            line.SetPosition(1, newPos + _growDir * speed * Time.deltaTime * 0.5f);
+            transform.position = newPos;
             _lastPos = newPos;
             //TODO:消耗能量
+            EventHandler.GetInstance().CallUpWaterChange(-growWaterCost);
         }
     }
 
