@@ -89,9 +89,4 @@ public class LineController : MonoBehaviour
 
         RootModel.GetInstance().ExtraSpeed -= addAmount;
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawRay(transform.position, _growDir);
-    }
 }
