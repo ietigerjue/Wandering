@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// ½»»¥»ùÀà
+/// ç‰©ä½“çš„è§¦å‘ç±»ï¼Œ
 /// </summary>
 [RequireComponent(typeof(Collider2D))]
 public class BaseInteractiveItem : MonoBehaviour
