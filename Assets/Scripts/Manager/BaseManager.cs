@@ -1,15 +1,17 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseManager<T> where T:new()
+public class BaseManager<T> : MonoBehaviour where T:MonoBehaviour
 {
-    private static T instance;
-
+    public static T instance;
     public static T GetInstance()
     {
-        if (instance == null)
-            instance = new T();
         return instance;
     }
+    void Awake()
+    {
+        instance = this as T;
+    }
+
 }
