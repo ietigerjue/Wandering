@@ -13,5 +13,4 @@ public class BaseManager<T> : MonoBehaviour where T:MonoBehaviour
     {
         instance = this as T;
     }
-
 }
