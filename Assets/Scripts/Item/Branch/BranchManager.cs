@@ -14,7 +14,7 @@ public class BranchManager : MonoBehaviour
     public void BranchLineAlert()
     {
         var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var cols = Physics2D.OverlapPoint(pos);
+        var cols = Physics2D.OverlapPoint(pos, 1 << LayerMask.NameToLayer("Branch"));
         if (cols && cols.gameObject.GetComponent<BranchPoint>())
         {
             var branchPoint = cols.gameObject.GetComponent<BranchPoint>();
