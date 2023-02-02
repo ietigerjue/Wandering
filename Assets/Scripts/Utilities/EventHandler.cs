@@ -15,6 +15,7 @@ public static class EventHandler
         WaterChange?.Trigger(cost);
         var model = RootModel.GetInstance();
         model.WaterRemain = Mathf.Clamp(model.WaterRemain + cost, 0, model.MaxWaterRemain);
+        Debug.Log("当前水分：" + model.WaterRemain);
     }
     //速度改变
     public static EasyEvent<float> SpeedChange = new EasyEvent<float>();
