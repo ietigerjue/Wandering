@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class DialogPanel : BaseManager<DialogPanel>
+public class DialogPanel : SingletonMono<DialogPanel>
 {
     public Text Name;
     public Text Content;

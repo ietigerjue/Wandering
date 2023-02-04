@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnapsackManager : BaseManager<KnapsackManager>
+public class KnapsackManager : Singleton<KnapsackManager>
 {
     private List<Item> items = new List<Item>();//记录你背包里有什么
     public ItemLib itemLibary;

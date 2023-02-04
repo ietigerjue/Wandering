@@ -144,7 +144,6 @@ GameObject:
   - component: {fileID: 6468076201620429649}
   - component: {fileID: 6468076201620429648}
   - component: {fileID: 6468076201620429646}
-  - component: {fileID: 6468076201620429651}
   m_Layer: 0
   m_Name: LineController
   m_TagString: Root
@@ -279,24 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e590fb5c3856eef41b90e227e9796e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 0}
   rayLength: 1
   growWaterCost: 0
   speedIncrement: 1
---- !u!114 &6468076201620429651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6468076201620429645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74a9dc88889350b47830f4f967bbe93d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurSpeed: 1
-  ExtraSpeed: 0
-  MinGrowSpeed: 0.5
-  MaxGrowSpeed: 10
-  WaterRemain: 100
-  MaxWaterRemain: 100
