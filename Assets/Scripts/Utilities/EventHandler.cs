@@ -12,18 +12,18 @@ public static class EventHandler
     /// <param name="cost">消耗数量</param>
     public static void CallUpWaterChange(float cost)
     {
-        WaterChange?.Trigger(cost);
         var model = RootModel.GetInstance();
         model.WaterRemain = Mathf.Clamp(model.WaterRemain + cost, 0, model.MaxWaterRemain);
-        Debug.Log("当前水分：" + model.WaterRemain);
+        // Debug.Log("当前水分：" + model.WaterRemain);
+        WaterChange?.Trigger(cost);
     }
     //速度改变
     public static EasyEvent<float> SpeedChange = new EasyEvent<float>();
 
     public static void CallUpSpeedChange(float count)
     {
-        SpeedChange?.Trigger(count);
         var model = RootModel.GetInstance();
         model.CurSpeed = Mathf.Clamp(model.CurSpeed + count, model.MinGrowSpeed, model.MaxGrowSpeed);
+        SpeedChange?.Trigger(count);
     }
 }

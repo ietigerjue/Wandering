@@ -20,10 +20,15 @@ public class LineController : SingletonMono<LineController>
     public float rayLength;
     //消耗值
     public float growWaterCost;
+
+    public float accelerateCost;
     //加速数值
     public float speedIncrement;
     //是否是加速状态
     private bool _isAccelerate;
+    //血条
+    public PlayerBar playerBar;
+    public Transform hpBarPos;
     public List<Transform> reStep = new List<Transform>();
     float length = 0;
     private void Start()
@@ -50,6 +55,16 @@ public class LineController : SingletonMono<LineController>
 
         if (Input.GetKeyUp(KeyCode.E))
             _isAccelerate = false;
+
+        if (Input.GetKeyDown(KeyCode.F))
+            EventHandler.CallUpWaterChange(-25);
+
+        ShowHpBar();
+    }
+
+    public void ShowHpBar()
+    {
+        playerBar.transform.position = hpBarPos.position;
     }
 
     public void OnGrowStart()
@@ -124,10 +139,14 @@ public class LineController : SingletonMono<LineController>
         length += Vector2.Distance(_lastPos, newPos);
 
         var ray = Physics2D.Raycast(newPos, _growDir, rayLength, 1 << LayerMask.NameToLayer("Ground"));
-        if (ray.collider)
+        var rayCircle = Physics2D.OverlapCircle(newPos, rayLength * 0.5f, 1 << LayerMask.NameToLayer("Ground"));
+        if (ray.collider || rayCircle)
         {
-            Debug.Log(ray.collider.gameObject.name);
             _isGrow = false;
+        }
+        else
+        {
+            _isGrow = true;
         }
         if (_isGrow)
         {
@@ -159,9 +178,28 @@ public class LineController : SingletonMono<LineController>
                 addAmount += speedIncrement;
                 model.ExtraSpeed += speedIncrement;
             }
+            EventHandler.CallUpWaterChange(-accelerateCost);
             yield return null;
         }
 
         RootModel.GetInstance().ExtraSpeed -= addAmount;
+    }
+    /// <summary>
+    /// 对外提供加速功能的接口
+    /// </summary>
+    public void StartAccelerate()
+    {
+        _isAccelerate = true;
+        StartCoroutine(Accelerate());
+    }
+
+    public void EndAccelerate()
+    {
+        _isAccelerate = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(_lastPos, _lastPos + _growDir * rayLength);
     }
 }
