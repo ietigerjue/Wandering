@@ -23,6 +23,7 @@ public class BranchPoint : BaseInter
             Execution();
             _lineManager.GenerateLine(transform.position, col.gameObject.GetComponent<LineController>());
             _isBranch = true;
+            Destroy(gameObject);
         }
     }
 

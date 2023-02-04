@@ -13,6 +13,7 @@ public class UnderWater : BaseInter
         {
             EventHandler.CallUpWaterChange(waterAmount);
             EventHandler.CallUpSpeedChange(speedAmount);
+            Destroy(gameObject);
         });
     }
 

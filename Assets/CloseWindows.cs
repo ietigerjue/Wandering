@@ -19,14 +19,17 @@ public class CloseWindows : MonoBehaviour
 
      public void CloseWindow()
      {
+      click.Play();
         window.SetActive(false);
      }
       public void OpenWindow1()
    {
+      click.Play();
       window1.SetActive(true);
    }
    public void CloseWindow1()
 {
+   click.Play();
    window1.SetActive(false);
 }
 
