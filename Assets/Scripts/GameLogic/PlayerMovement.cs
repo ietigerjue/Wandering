@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rig;
     public float speed = 5;
     public Transform hand;
+    public bool canMove = true;
     private Animator anim;
     private void Start()
     {
@@ -14,13 +15,25 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
+        transform.position = ViewPort.instance.PlayerMoveablePosition(transform.position);
 
     }
     private void FixedUpdate()
     {
-        Movent();
+        if(canMove)
+        {
+            Movent();
+        }
         PointMouse();
+    }
 
+    public void StopMove()
+    {
+        canMove = false;
+    }
+    public void StartMove()
+    {
+        canMove = true;
     }
     private void Movent()
     {
